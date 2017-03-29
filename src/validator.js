@@ -406,6 +406,21 @@ Validator.prototype = {
     }
     return !this.check();
   },
+  
+  /**
+   * Determine if validation either passes or fails
+   * @param {function} passes
+   * @param {function} fails
+   * @return {boolean|undefined}
+   */
+  test: function(passes,fails) {
+    var isPassesAsync = this._checkAsync('passes', passes);
+    var isFailsAsync = this._checkAsync('fails', fails);
+    if(isPassesAsync && isFailsAsync) {
+      return this.checkAsync(passes,fails);
+    }
+    return this.check();
+  },
 
   /**
    * Check if validation should be called asynchronously
