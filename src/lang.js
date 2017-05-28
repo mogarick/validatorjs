@@ -1,6 +1,9 @@
 var Messages = require('./messages');
 
-require('./lang/en');
+var languages = {
+  en: require('./lang/en'),
+  es: require('./lang/es')
+}
 
 var container = {
 
@@ -42,7 +45,7 @@ var container = {
    */
   _load: function(lang) {
     if (!this.messages[lang]) {
-      var rawMessages = require('./lang/' + lang);
+      var rawMessages = languages[lang];
       this._set(lang, rawMessages);
     }
   },
