@@ -132,7 +132,7 @@ Messages.prototype = {
    */
   _replacePlaceholders: function(rule, template, data) {
     var message, attribute;
-
+    
     data.attribute = this._getAttributeName(rule.attribute);
     data[rule.name] = rule.getParameters().join(',');
 
@@ -140,7 +140,7 @@ Messages.prototype = {
       message = template;
 
       for (attribute in data) {
-        message = message.replace(new RegExp(':' + attribute, 'g'), data[attribute]);
+        message = message.replace(new RegExp(':' + attribute, 'g'), rule.validator.messages.attributeNames[data[attribute]]||data[attribute]);
       }
     }
 
